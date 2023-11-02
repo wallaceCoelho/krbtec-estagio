@@ -14,10 +14,9 @@ return new class extends Migration
         Schema::create('breed', function (Blueprint $table) {
             $table->id();
             $table->string('nm_breed');
-            $table->foreignId('breed_id')->constrained(
-                table: 'breed'
-            )->onUpdate('cascade')
-            ->onDelete('cascade');
+            $table->foreignId('species_id')->constrained(
+                table: 'species'
+            );
             $table->timestamps();
         });
     }

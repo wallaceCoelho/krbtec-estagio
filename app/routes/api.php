@@ -32,4 +32,8 @@ Route::controller(UserController::class)->group(function ()
 Route::controller(PetsController::class)->group(function () 
 {
     Route::post('/registerPet', 'store');
+    Route::get('/getPets', 'getAll');
+    Route::post('/deletePets', 'delete');
+    Route::get('/getPet', 'getPet');
+    Route::post('/updatePet', 'update');
 });

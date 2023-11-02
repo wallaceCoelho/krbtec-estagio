@@ -17,11 +17,10 @@ return new class extends Migration
             $table->string('cpf')->nullable(false);
             $table->string('email')->nullable(false);
             $table->string('phone')->nullable(false);
-            $table->date('dt_nascimento')->nullable(false);
+            $table->date('dt_birth')->nullable(false);
             $table->foreignId('pets_id')->constrained(
                 table: 'pets'
-            )->onUpdate('cascade')
-            ->onDelete('cascade');
+            );
             $table->timestamps();
         });
     }

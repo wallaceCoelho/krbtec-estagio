@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Pets extends Model
@@ -20,9 +21,9 @@ class Pets extends Model
         return $this->hasOne(Notify_pets::class);
     }
 
-    public function species() : HasOne
+    public function species() : BelongsTo
     {
-        return $this->hasOne(Species::class);
+        return $this->BelongsTo(Species::class);
     }
 
     public function address() : HasOne
@@ -36,6 +37,8 @@ class Pets extends Model
         'size',
         'age',
         'desc_pets',
-        'status'
+        'status',
+        'specie_id',
+        'breed_id'
     ];
 }

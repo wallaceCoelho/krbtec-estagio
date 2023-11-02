@@ -22,8 +22,7 @@ return new class extends Migration
             $table->integer('number');
             $table->foreignId('pets_id')->constrained(
                 table: 'pets'
-            )->onUpdate('cascade')
-            ->onDelete('cascade');
+            );
             $table->timestamps();
         });
     }

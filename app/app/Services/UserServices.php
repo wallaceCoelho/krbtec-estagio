@@ -15,7 +15,7 @@ class UserServices implements IUserServices
 
     public function store(array $request) : array
     {
-        return (['response' => $this->user->store($request)]);
+        return $this->user->store($request);
     }
 
     public function getAll() : array

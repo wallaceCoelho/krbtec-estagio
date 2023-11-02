@@ -19,6 +19,12 @@ return new class extends Migration
             $table->string('age')->nullable(false);
             $table->string('desc_pets')->nullable(false);
             $table->boolean('status')->nullable(false);
+            $table->foreignId('specie_id')->constrained( 
+                table: 'species'
+            );
+            $table->foreignId('breed_id')->constrained( 
+                table: 'breed'
+            );
             $table->timestamps();
         });
     }

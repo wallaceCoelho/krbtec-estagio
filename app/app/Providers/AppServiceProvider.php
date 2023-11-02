@@ -10,6 +10,8 @@ use App\Services\Interfaces\IAuthServices;
 use App\Services\Interfaces\IPetsServices;
 use App\Services\Interfaces\IUserServices;
 use App\Services\AuthServices;
+use App\Services\FilesServices;
+use App\Services\Interfaces\IFilesServices;
 use App\Services\PetsServices;
 use App\Services\UserServices;
 use Illuminate\Support\ServiceProvider;
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IUserServices::class, UserServices::class);
         $this->app->bind(IPetsServices::class, PetsServices::class);
         $this->app->bind(IAuthServices::class, AuthServices::class);
+        $this->app->bind(IFilesServices::class, FilesServices::class);
     }
 
     /**
@@ -38,5 +41,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IUserServcies::class, UserServcies::class);
         $this->app->bind(IPetsServcies::class, PetsServcies::class);
         $this->app->bind(IAuthServcies::class, AuthServcies::class);
+        $this->app->bind(IFilesServices::class, FilesServices::class);
     }
 }

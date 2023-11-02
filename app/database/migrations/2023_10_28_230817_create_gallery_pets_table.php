@@ -20,8 +20,7 @@ return new class extends Migration
             $table->string('img4');
             $table->foreignId('pets_id')->constrained(
                 table: 'pets'
-            )->onUpdate('cascade')
-            ->onDelete('cascade');
+            );
             $table->timestamps();
         });
     }

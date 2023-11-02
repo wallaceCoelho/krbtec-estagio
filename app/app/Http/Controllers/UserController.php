@@ -28,7 +28,7 @@ class UserController extends Controller
 
     public function store(Request $request) : JsonResponse
     {
-        $data = $request->only(['name', 'email', 'password']);
+        $data = $request->only(['name', 'email', 'status', 'password']);
         return response()->json($this->user->store($data));
     }
 
@@ -40,7 +40,7 @@ class UserController extends Controller
 
     public function update(Request $request) : JsonResponse
     {
-        $data = $request->only(['id', 'name', 'email', 'password']);
+        $data = $request->only(['id', 'name', 'email', 'status', 'password']);
         return response()->json($this->user->update($data));
     }
 }

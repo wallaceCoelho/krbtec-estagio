@@ -2,11 +2,12 @@
 
 namespace App\Repository\Interfaces;
 
+
 interface IPetsRepository
 {
-    public function getAll() : array;
+    public function getAll();
 
-    public function getPets(int $id) : array;
+    public function getPet(int $id) : array;
 
     public function store(array $request) : array;
 

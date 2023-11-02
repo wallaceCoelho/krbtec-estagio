@@ -14,10 +14,6 @@ return new class extends Migration
         Schema::create('species', function (Blueprint $table) {
             $table->id();
             $table->string('nm_species');
-            $table->foreignId('pets_id')->constrained(
-                table: 'pets'
-            )->onUpdate('cascade')
-            ->onDelete('cascade');
             $table->timestamps();
         });
     }
