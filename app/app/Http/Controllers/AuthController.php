@@ -2,24 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Interfaces\IAuthServices;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function __construct() 
-    {
-        
-    }
+    protected IAuthServices $auth;
 
+    public function __construct(IAuthServices $auth) 
+    {
+        $this->auth = $auth;
+    }
+    
     public function login(Request $request) : JsonResponse
     {
-        return response()->json([]);
+        $credentials = $request->only(['email', 'password']);
+
+        return $this->auth->login($credentials);
     }
 
-    public function logout(Request $request) : JsonResponse
+    public function logout() : JsonResponse
     {
-        return response()->json([]);
+        return response()->json($this->auth->logout());
     }
 
     public function refreshToken() : JsonResponse

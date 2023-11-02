@@ -16,7 +16,6 @@ class FilesServices implements IFilesServices
 
     public function get($imgName) : array
     {
-        //var_dump(Storage::files($imgName['img_header']));
         $data = ([
             'img_header' => Storage::files($imgName['img_header'])[0],
             'img1' => Storage::files($imgName['img1'])[0],

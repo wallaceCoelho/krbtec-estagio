@@ -8,7 +8,6 @@ use App\Services\Interfaces\IFilesServices;
 use ErrorException;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 
 class PetsRepository implements IPetsRepository
@@ -108,7 +107,7 @@ class PetsRepository implements IPetsRepository
         }
     }
 
-    private static function updateModels($pets, $request) : bool
+    private function updateModels($pets, $request) : bool
     {
         try
         {
@@ -118,7 +117,7 @@ class PetsRepository implements IPetsRepository
             $address = $request['address'];
             $pet = $request['pet'];
 
-            $pets->adress()->update([
+            $pets->address()->update([
                 'city' => isset($address['city']) ? $address['city'] : $petsAddress['city'],
                 'state' => isset($address['state']) ? $address['state'] : $petsAddress['state'],
                 'country' => isset($address['country']) ? $address['country'] : $petsAddress['country'],
@@ -129,11 +128,11 @@ class PetsRepository implements IPetsRepository
             ]);
 
             $pets->gallery()->update([
-                'img_header' => isset($images['img_header']) ? self::updateImages($images) : $petsGallery['img_header'],
-                'img1' => isset($images['img1']) ? self::updateImages($images) : $petsGallery['img1'],
-                'img2' => isset($images['img2']) ? self::updateImages($images) : $petsGallery['img2'],
-                'img3' => isset($images['img3']) ? self::updateImages($images) : $petsGallery['img3'],
-                'img4' => isset($images['img4']) ? self::updateImages($images) : $petsGallery['img4']
+                'img_header' => isset($images['img_header']) ? self::updateImages($images)['img_header'] : $petsGallery['img_header'],
+                'img1' => isset($images['img1']) ? self::updateImages($images)['img1'] : $petsGallery['img1'],
+                'img2' => isset($images['img2']) ? self::updateImages($images)['img2'] : $petsGallery['img2'],
+                'img3' => isset($images['img3']) ? self::updateImages($images)['img3'] : $petsGallery['img3'],
+                'img4' => isset($images['img4']) ? self::updateImages($images)['img4'] : $petsGallery['img4']
             ]);
 
             $pets->update([
@@ -146,9 +145,11 @@ class PetsRepository implements IPetsRepository
                 'specie_id' => isset($pet['specie_id']) ? $pet['specie_id'] : $pets['specie_id'],
                 'breed_id'  => isset($pet['breed_id']) ? $pet['breed_id'] : $pets['breed_id']
             ]);
+
+            $pets->save();
             return true;
         }
-        catch(Exception)
+        catch(Exception $e)
         {
             return false;
         }

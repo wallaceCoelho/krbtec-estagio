@@ -36,10 +36,10 @@ class PetsController extends Controller
 
     public function update(Request $request) : JsonResponse
     {
-        return response()->json($this->pets->store([
-            'pet' => $request->only(['name', 'weight', 'size', 'age', 'desc_pets', 'status', 'specie_id', 'breed_id']),
+        return response()->json($this->pets->update([
+            'pet' => $request->only(['id', 'name', 'weight', 'size', 'age', 'desc_pets', 'status', 'specie_id', 'breed_id']),
             'address' => $request->only(['city', 'state', 'country', 'cep', 'street', 'neighborhood', 'number']),
-            'images' => $this->file->store([
+            'images' => ([
                 'img_header' => $request->file('img_header'),
                 'img1' => $request->file('img1'),
                 'img2' => $request->file('img2'),

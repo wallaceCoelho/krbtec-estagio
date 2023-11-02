@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PetsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -32,8 +33,18 @@ Route::controller(UserController::class)->group(function ()
 Route::controller(PetsController::class)->group(function () 
 {
     Route::post('/registerPet', 'store');
-    Route::get('/getPets', 'getAll');
-    Route::post('/deletePets', 'delete');
-    Route::get('/getPet', 'getPet');
     Route::post('/updatePet', 'update');
+    Route::post('/deletePets', 'delete');
+    Route::get('/getPets', 'getAll');
+    Route::get('/getPet', 'getPet');
+});
+
+Route::controller(AuthController::class)->group(function () 
+{
+    Route::post('/login', 'login');
+    
+    Route::middleware(['jwt.auth'])->group(function () 
+    {
+        Route::post('/logout', 'logout');
+    });
 });

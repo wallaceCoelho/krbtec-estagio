@@ -22,6 +22,11 @@ class PetsServices implements IPetsServices
         return $this->pets->store($request);
     }
 
+    public function update(array $request) : array
+    {
+        return $this->pets->update($request);
+    }
+
     public function delete(int $id) : array
     {
         return $this->pets->delete($id);

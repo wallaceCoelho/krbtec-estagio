@@ -5,6 +5,8 @@ namespace App\Services\Interfaces;
 interface IPetsServices
 {
     public function store(array $request) : array;
+    
+    public function update(array $request) : array;
 
     public function getAll() : array;
 
