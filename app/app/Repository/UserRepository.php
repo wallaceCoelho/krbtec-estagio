@@ -42,6 +42,8 @@ class UserRepository implements IUserRepository
     {
         try
         {
+            $userExist = User::where('email', $request['email']);
+            if(!isset($userExist)) return (['response' => 'este e-mail já está cadastrado']);
             $user = User::create($request)->save();
             return $user ? (['response' => 'Usuário cadastrado com sucesso']) : (['response' => 'Erro ao cadastrar novo usuário']);
         }
@@ -57,7 +59,7 @@ class UserRepository implements IUserRepository
         {
             $user = User::find($id);
             if(!$user) return (['response' => 'Usuário não encontrado']);
-            $user->truncate();
+            $user->delete();
             return (['response' => 'Usuário deletado']);
         }
         catch(ErrorException $e)

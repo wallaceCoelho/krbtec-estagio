@@ -32,12 +32,14 @@ class UserController extends Controller
     public function store(Request $request) : JsonResponse
     {
         $data = $request->only(['name', 'email', 'status', 'password']);
+        $data['status'] = 1;
         return response()->json($this->user->store($data));
     }
 
     public function delete(Request $request) : JsonResponse
     {
-        $id = (int) $request->only(['id']);
+        
+        $id = (int) $request->get('id');
         return response()->json($this->user->delete($id));
     }
 

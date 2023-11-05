@@ -51,7 +51,7 @@ class PetsServices implements IPetsServices
 
     private function getImages($pets)
     {
-        $imagesName =([
+        $imagesName = ([
             'img_header' => $pets['img_header'],
             'img1' => $pets['img1'],
             'img2' => $pets['img2'],

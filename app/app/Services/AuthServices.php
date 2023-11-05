@@ -51,10 +51,12 @@ class AuthServices implements IAuthServices
 
     protected function respondWithToken(string $token) : JsonResponse
     {
+        $userId = auth()->user();
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user_id' => $userId['id'],
+            'expires_in' => auth()->factory()->getTTL(),
             'login_in' => new DateTime('now', new DateTimeZone('America/Sao_Paulo'))
         ]);
     }

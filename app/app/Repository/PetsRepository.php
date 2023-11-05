@@ -55,6 +55,8 @@ class PetsRepository implements IPetsRepository
     {
         try
         {
+            $petsExist = Pets::where('name', $request['pet']['name']);
+            if($petsExist) return (['response' => 'Pet já está cadastrado']);
             $pets = Pets::create($request['pet']);
             $pets->address()->create($request['address']);
             $pets->gallery()->create($request['images']);

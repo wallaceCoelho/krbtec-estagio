@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repository\Interfaces\INotifyRepository;
 use App\Repository\Interfaces\IPetsRepository;
 use App\Repository\Interfaces\IUserRepository;
+use App\Repository\NotifyRepository;
 use App\Repository\PetsRepository;
 use App\Repository\UserRepository;
 use App\Services\Interfaces\IAuthServices;
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IPetsServices::class, PetsServices::class);
         $this->app->bind(IAuthServices::class, AuthServices::class);
         $this->app->bind(IFilesServices::class, FilesServices::class);
+        $this->app->bind(INotifyRepository::class, NotifyRepository::class);
     }
 
     /**
@@ -42,5 +45,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IPetsServcies::class, PetsServcies::class);
         $this->app->bind(IAuthServcies::class, AuthServcies::class);
         $this->app->bind(IFilesServices::class, FilesServices::class);
+        $this->app->bind(INotifyRepository::class, NotifyRepository::class);
     }
 }
