@@ -1,0 +1,17 @@
+Olá, venho apresentar o projeto Pets. Infelizmente não concluí totalmente o frontend, porém, tentei deixar o backend o mais completo possível dentro do meu conhecimento.
+
+Dependências: Laravel 10, JWT Tymon, MySQL e MailHog. 
+
+Para autenticação decidi utilizar JWT(Json Web Token). Com este token eu faço a autenticação dos CRUD de usuário e animais, deixando siponível apenas o GET para os pets e o GET para apenas 1 pet.
+
+Para recuperar a senha criei um token único para envio no e-mail junto ao link de redifinição comparando com o token ja criado.
+
+A solicitação de notificação está sendo salva no banco e antes disso está enviando as informações ao e-mail do solicitante.
+
+Para envio de e-mails utilizei o MailHog para teste local.
+
+Como arquitetura, tentei utilizar desacoplamento e separar as responsabilidades. Utilizei injeção de dependência com interfaces declaradas nos providers da aplicação.
+As responsabilidades então separadas em: 
+ - Controllers -> Onde fica a lógica de gerenciamento de respostas do servidor.
+ - Services -> Camada responsável pela lógica de domínio do sistema.
+ - Repositórios -> Camada responsável pela lógica de dados da base de dados.

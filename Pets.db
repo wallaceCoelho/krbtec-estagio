@@ -1,0 +1,147 @@
+CREATE TABLE `species` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nm_species` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `species` VALUES (1,'Gato',NULL,NULL),(2,'Cachorro',NULL,NULL);
+
+CREATE TABLE `breed` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `nm_breed` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `species_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `breed_species_id_foreign` (`species_id`),
+  CONSTRAINT `breed_species_id_foreign` FOREIGN KEY (`species_id`) REFERENCES `species` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `breed` VALUES (1,'Siamês',1,NULL,NULL),(2,'Garfield',1,NULL,NULL),(3,'Labrador',2,NULL,NULL),(4,'Pastor Alemão',2,NULL,NULL);
+
+CREATE TABLE `pets` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `weight` decimal(8,2) NOT NULL,
+  `size` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `age` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `desc_pets` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `specie_id` bigint unsigned NOT NULL,
+  `breed_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pets_specie_id_foreign` (`specie_id`),
+  KEY `pets_breed_id_foreign` (`breed_id`),
+  CONSTRAINT `pets_breed_id_foreign` FOREIGN KEY (`breed_id`) REFERENCES `breed` (`id`),
+  CONSTRAINT `pets_specie_id_foreign` FOREIGN KEY (`specie_id`) REFERENCES `species` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `address_pets` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cep` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `street` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `neighborhood` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `number` int NOT NULL,
+  `pets_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `address_pets_pets_id_foreign` (`pets_id`),
+  CONSTRAINT `address_pets_pets_id_foreign` FOREIGN KEY (`pets_id`) REFERENCES `pets` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `gallery_pets` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `img_header` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img1` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img2` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img3` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `img4` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pets_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `gallery_pets_pets_id_foreign` (`pets_id`),
+  CONSTRAINT `gallery_pets_pets_id_foreign` FOREIGN KEY (`pets_id`) REFERENCES `pets` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `gallery_pets` VALUES (1,'65404add648a5_tini.jpg','65404add648a9_tini-2.jpg','65404add648ab_tini-3.jpg','65404add648ac_tini-4.jpg','65404add648ad_tini-5.jpg',12,'2023-10-31 03:31:25','2023-10-31 03:31:25'),(2,'65404cae089d5_tini.jpg','65404cae089d9_tini-2.jpg','65404cae089db_tini-3.jpg','65404cae089dc_tini-4.jpg','65404cae089dd_tini-5.jpg',13,'2023-10-31 03:39:10','2023-10-31 03:39:10'),(3,'65404e95d5c23_tini.jpg','65404e95d5c2f_tini-2.jpg','65404e95d5c32_tini-3.jpg','65404e95d5c34_tini-4.jpg','65404e95d5c36_tini-5.jpg',14,'2023-10-31 03:47:17','2023-10-31 03:47:17');
+
+CREATE TABLE `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `migrations` VALUES (1,'2023_10_28_233116_create_species_table',1),(2,'2023_10_28_233253_create_breed_table',2),(3,'2023_10_28_231718_create_pets_table',3),(4,'2014_10_12_000000_create_users_table',4),(5,'2014_10_12_100000_create_password_reset_tokens_table',4),(6,'2019_08_19_000000_create_failed_jobs_table',4),(7,'2019_12_14_000001_create_personal_access_tokens_table',4),(8,'2023_10_28_230058_create_notify_pets_table',4),(9,'2023_10_28_230817_create_gallery_pets_table',4),(10,'2023_10_28_231136_create_address_pets_table',4);
+
+CREATE TABLE `notify_pets` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cpf` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dt_birth` date NOT NULL,
+  `pets_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `notify_pets_pets_id_foreign` (`pets_id`),
+  CONSTRAINT `notify_pets_pets_id_foreign` FOREIGN KEY (`pets_id`) REFERENCES `pets` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `users` VALUES (1,'Wallace Coelho','test@test.com',NULL,1,'$2y$10$mP3us/fZa3l7Un.8XlbRPupqfZNpIUBLmIupHUhtTkuUuUaIw5jXC',NULL,'2023-10-31 01:30:58','2023-10-31 01:30:58');
+

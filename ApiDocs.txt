@@ -1,0 +1,147 @@
+POST DeleteUser
+    http://127.0.0.1:8000/api/delete
+
+    Headers : Authorization Bearer Token, application/json
+
+    Params: id : int
+
+    Resposta: Json
+
+POST
+    Update
+    http://127.0.0.1:8000/api/update
+
+    Headers : Authorization Bearer Token, application/json
+
+    Query Params id, name, status
+
+    Resposta: Json
+
+POST registerPets
+    http://127.0.0.1:8000/api/registerPet
+
+    Headers : Authorization Bearer Token, application/json
+
+    Query Params
+    name
+    weight
+    size
+    age
+    desc_pets
+    status
+    city
+    state
+    country
+    cep
+    street
+    neighborhood
+    number
+    specie_id
+    breed_id
+    Body form-data: file x 5
+
+    Resposta: Json
+
+POST DeletePets
+    http://127.0.0.1:8000/api/deletePets
+
+    Headers : Authorization Bearer Token, application/json
+
+    Query Params id
+
+    Resposta: 'Pet deletado' ou 'Erro: erro mensagem'
+
+POST UpdatePet
+    http://127.0.0.1:8000/api/updatePet
+    
+    Headers : Authorization Bearer Token, application/json
+
+    Query Params
+    id
+    name
+    weight
+    size
+    age
+    desc_pets
+    status
+    city
+    state
+    country
+    street
+    neighborhood
+    number
+    specie_id
+    breed_id
+    cep
+    street
+    neighborhood
+    number
+    specie_id
+    breed_id
+    Body form-data : file x5
+    
+    Resposta: Json
+
+GET GetUsers
+    http://127.0.0.1:8000/api/getUsers
+
+    Headers : Authorization Bearer Token, application/json
+
+    Resposta: Json
+
+GET GetUser 
+    http://127.0.0.1:8000/api/getUser?id=2
+
+    Query Params
+    id
+
+    Headers : Authorization Bearer Token, application/json
+
+    Resposta: Json
+
+GET getPets
+    http://127.0.0.1:8000/api/getPets
+
+GET GetPet
+    http://127.0.0.1:8000/api/getPet?id=3
+
+    Query Params
+    id
+
+    Resposta: Json
+    
+POST Login
+    http://127.0.0.1:8000/api/login?email=test@test.com&password=admin
+
+    Query Params
+    email
+    test@test.com
+    password
+    admin
+
+    Resposta: Json
+
+POST Logout
+    http://127.0.0.1:8000/api/logout
+
+    Header : Authorization Bearer Token, application/json
+
+POST RefreshToken
+    http://127.0.0.1:8000/api/refresh
+
+    Header : Authorization Bearer Token, application/json
+
+POST SendEmail
+    http://127.0.0.1:8000/api/sendNotify
+
+    Query Params
+    name
+    name_pet
+    cpf
+    email
+    phone
+    dt_birth
+    id
+
+    Resposta : Json
+    
