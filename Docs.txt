@@ -1,5 +1,8 @@
 Olá, venho apresentar o projeto Pets. Infelizmente não concluí totalmente o frontend, porém, tentei deixar o backend o mais completo possível dentro do meu conhecimento.
 
+Username default: test@test.com
+Password default: admin
+
 Dependências: Laravel 10, JWT Tymon, MySQL e MailHog. 
 
 Para autenticação decidi utilizar JWT(Json Web Token). Com este token eu faço a autenticação dos CRUD de usuário e animais, deixando siponível apenas o GET para os pets e o GET para apenas 1 pet.
